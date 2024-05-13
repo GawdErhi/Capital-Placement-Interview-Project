@@ -9,12 +9,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Handlers\Contracts\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="DTO\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>

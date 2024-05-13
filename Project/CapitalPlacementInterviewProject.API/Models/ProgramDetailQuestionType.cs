@@ -8,6 +8,8 @@
 
         public virtual string Question { get; set; }
 
-        public virtual int MaxAllowedChoice { get; set; }
+        public virtual int MaxAllowedChoices { get; set; }
+
+        public virtual bool EnableOtherOption { get; set; }
     }
 }
