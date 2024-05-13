@@ -13,5 +13,7 @@
         public int MaxAllowedChoices { get; set; }
 
         public bool EnableOtherOption { get; set; }
+
+        public List<ProgramDetailQuestionTypeChoiceDTO> Choices { get; set; }
     }
 }

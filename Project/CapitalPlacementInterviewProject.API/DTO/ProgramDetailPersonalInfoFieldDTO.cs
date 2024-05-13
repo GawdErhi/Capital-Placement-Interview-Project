@@ -7,5 +7,7 @@
         public string ProgramDetailId { get; set; }
 
         public string PersonalInfoFieldId { get; set; }
+
+        public bool Internal { get; set; }
     }
 }
