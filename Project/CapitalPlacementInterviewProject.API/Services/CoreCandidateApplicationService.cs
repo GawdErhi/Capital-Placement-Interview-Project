@@ -1,6 +1,4 @@
 ﻿using CapitalPlacementInterviewProject.API.DTO;
-using CapitalPlacementInterviewProject.API.Exceptions;
-using CapitalPlacementInterviewProject.API.HelperModels;
 using CapitalPlacementInterviewProject.API.Models;
 using CapitalPlacementInterviewProject.API.Repository.Contracts;
 using CapitalPlacementInterviewProject.API.Services.Contracts;
@@ -13,17 +11,11 @@ namespace CapitalPlacementInterviewProject.API.Services
     {
         private readonly IProgramCandidateRepository _programCandidateRepository;
         private readonly IProgramCandidateQuestionTypeAnswerRepository _questionAnswerRepository;
-        private readonly IProgramDetailQuestionTypeRepository _programDetailQuestionTypeRepository;
-        private readonly IProgramDetailQuestionTypeChoiceRepository _programDetailQuestionTypeChoiceRepository;
-        private readonly IQuestionTypeRepository _questionTypeRepository;
         private readonly ILogger _logger;
-        public CoreCandidateApplicationService(IProgramCandidateRepository programCandidateRepository, IProgramCandidateQuestionTypeAnswerRepository questionAnswerRepository, IProgramDetailQuestionTypeRepository programDetailQuestionTypeRepository, IProgramDetailQuestionTypeChoiceRepository programDetailQuestionTypeChoiceRepository, IQuestionTypeRepository questionTypeRepository, ILogger logger)
+        public CoreCandidateApplicationService(IProgramCandidateRepository programCandidateRepository, IProgramCandidateQuestionTypeAnswerRepository questionAnswerRepository, ILogger logger)
         {
             _programCandidateRepository = programCandidateRepository;
             _questionAnswerRepository = questionAnswerRepository;
-            _programDetailQuestionTypeRepository = programDetailQuestionTypeRepository;
-            _programDetailQuestionTypeChoiceRepository = programDetailQuestionTypeChoiceRepository;
-            _questionTypeRepository = questionTypeRepository;
             _logger = logger;
         }
 

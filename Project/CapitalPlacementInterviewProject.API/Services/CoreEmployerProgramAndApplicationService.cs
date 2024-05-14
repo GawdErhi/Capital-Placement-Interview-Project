@@ -1,6 +1,4 @@
 ﻿using CapitalPlacementInterviewProject.API.DTO;
-using CapitalPlacementInterviewProject.API.Exceptions;
-using CapitalPlacementInterviewProject.API.HelperModels;
 using CapitalPlacementInterviewProject.API.Models;
 using CapitalPlacementInterviewProject.API.Repository.Contracts;
 using CapitalPlacementInterviewProject.API.Services.Contracts;
@@ -11,21 +9,17 @@ namespace CapitalPlacementInterviewProject.API.Services
     public class CoreEmployerProgramAndApplicationService : ICoreEmployerProgramAndApplicationService
     {
         private readonly IProgramDetailRepository _programDetailRepository;
-        private readonly IPersonalInfoFieldRepository _personalInfoFieldRepository;
         private readonly IProgramDetailPersonalInfoFieldRepository _programDetailPersonalInfoFieldRepository;
         private readonly IProgramDetailQuestionTypeRepository _programDetailQuestionTypeRepository;
         private readonly IProgramDetailQuestionTypeChoiceRepository _programDetailQuestionTypeChoiceRepository;
-        private readonly IQuestionTypeRepository _questionTypeRepository;
         private readonly ILogger _logger;
 
-        public CoreEmployerProgramAndApplicationService(IProgramDetailRepository programDetailRepository, IPersonalInfoFieldRepository personalInfoFieldRepository, IProgramDetailPersonalInfoFieldRepository programDetailPersonalInfoFieldRepository, IProgramDetailQuestionTypeRepository programDetailQuestionTypeRepository, IProgramDetailQuestionTypeChoiceRepository programDetailQuestionTypeChoiceRepository, IQuestionTypeRepository questionTypeRepository, ILogger logger)
+        public CoreEmployerProgramAndApplicationService(IProgramDetailRepository programDetailRepository, IProgramDetailPersonalInfoFieldRepository programDetailPersonalInfoFieldRepository, IProgramDetailQuestionTypeRepository programDetailQuestionTypeRepository, IProgramDetailQuestionTypeChoiceRepository programDetailQuestionTypeChoiceRepository, ILogger logger)
         {
             _programDetailRepository = programDetailRepository;
-            _personalInfoFieldRepository = personalInfoFieldRepository;
             _programDetailPersonalInfoFieldRepository = programDetailPersonalInfoFieldRepository;
             _programDetailQuestionTypeRepository = programDetailQuestionTypeRepository;
             _programDetailQuestionTypeChoiceRepository = programDetailQuestionTypeChoiceRepository;
-            _questionTypeRepository = questionTypeRepository;
             _logger = logger;
         }
 
