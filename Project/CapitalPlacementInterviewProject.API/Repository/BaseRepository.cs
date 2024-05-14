@@ -13,15 +13,31 @@ namespace CapitalPlacementInterviewProject.API.Repository
         }
 
         /// <summary>
-        /// Adds and saves an item to the database entity
+        /// Adds an item to the database entity
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> SaveAsync(T model)
+        public async Task AddAsync(T model)
         {
             try
             {
                 await _dbContext.AddAsync(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Saves changes made to db context to the database
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<bool> SaveAsync()
+        {
+            try
+            {
                 return await _dbContext.SaveChangesAsync() > 0;
             }
             catch (Exception)
@@ -31,16 +47,15 @@ namespace CapitalPlacementInterviewProject.API.Repository
         }
 
         /// <summary>
-        /// Adds and saves a collections of items to the database entity
+        /// Adds a collections of items to the database entity
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        public async Task<bool> SaveBundleAsync(IEnumerable<T> models)
+        public async Task AddBundleAsync(IEnumerable<T> models)
         {
             try
             {
                 await _dbContext.AddRangeAsync(models);
-                return await _dbContext.SaveChangesAsync() > 0;
             }
             catch (Exception)
             {

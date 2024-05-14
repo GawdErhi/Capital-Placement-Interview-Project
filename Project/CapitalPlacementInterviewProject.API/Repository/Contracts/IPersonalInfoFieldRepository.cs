@@ -1,6 +1,8 @@
-﻿namespace CapitalPlacementInterviewProject.API.Repository.Contracts
+﻿using CapitalPlacementInterviewProject.API.Models;
+
+namespace CapitalPlacementInterviewProject.API.Repository.Contracts
 {
-    public interface IPersonalInfoFieldRepository
+    public interface IPersonalInfoFieldRepository : IBaseRepository<PersonalInfoField>
     {
     }
 }

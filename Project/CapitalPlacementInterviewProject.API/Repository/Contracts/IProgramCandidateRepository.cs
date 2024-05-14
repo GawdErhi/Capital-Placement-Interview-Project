@@ -1,6 +1,8 @@
-﻿namespace CapitalPlacementInterviewProject.API.Repository.Contracts
+﻿using CapitalPlacementInterviewProject.API.Models;
+
+namespace CapitalPlacementInterviewProject.API.Repository.Contracts
 {
-    public interface IProgramCandidateRepository
+    public interface IProgramCandidateRepository : IBaseRepository<ProgramCandidate>
     {
     }
 }

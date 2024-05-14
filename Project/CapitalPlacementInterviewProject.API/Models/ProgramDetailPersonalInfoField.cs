@@ -5,5 +5,7 @@
         public virtual string ProgramDetailId { get; set; }
 
         public virtual string PersonalInfoFieldId { get; set; }
+
+        public  virtual bool Internal { get; set; }
     }
 }

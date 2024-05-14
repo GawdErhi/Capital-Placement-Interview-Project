@@ -5,18 +5,25 @@ namespace CapitalPlacementInterviewProject.API.Repository.Contracts
     public interface IBaseRepository<T> where T : BaseModel
     {
         /// <summary>
-        /// Adds and saves an item to the database entity
+        /// Adds an item to the database entity
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<bool> SaveAsync(T model);
+        Task AddAsync(T model);
 
         /// <summary>
-        /// Adds and saves a collections of items to the database entity
+        /// Saves changes made to db context to the database
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<bool> SaveAsync();
+
+        /// <summary>
+        /// Adds a collections of items to the database entity
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        Task<bool> SaveBundleAsync(IEnumerable<T> models);
+        Task AddBundleAsync(IEnumerable<T> models);
 
         /// <summary>
         /// Gets entity with id
