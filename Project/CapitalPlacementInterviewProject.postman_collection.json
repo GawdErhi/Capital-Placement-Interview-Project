@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "abbb6c25-bff6-4177-91ea-4fdbf4b7a48d",
+		"name": "CapitalPlacementInterviewProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8226945"
+	},
+	"item": [
+		{
+			"name": "Create Program And Application Form",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"\",\r\n    \"title\": \"Leaders of Tomorrow\",\r\n    \"description\": \"Discussions about future topics regarding web3, crypto, artificial intelligence and the world as we know it\",\r\n    \"personalInfoFields\": [\r\n        {\r\n            \"id\": \"\",\r\n            \"programDetailId\": \"string\",\r\n            \"personalInfoFieldId\": \"4d95107d-3004-40e8-8881-f9fd59a7e559\",\r\n            \"internal\": false\r\n        },\r\n        {\r\n            \"id\": \"\",\r\n            \"programDetailId\": \"string\",\r\n            \"personalInfoFieldId\": \"96598723-4009-4ce2-b567-f6ee16933ad8\",\r\n            \"internal\": false\r\n        },\r\n        {\r\n            \"id\": \"\",\r\n            \"programDetailId\": \"string\",\r\n            \"personalInfoFieldId\": \"3e3deded-457b-46e9-b1f2-a574ec4d70f2\",\r\n            \"internal\": false\r\n        }\r\n    ],\r\n    \"questions\": [\r\n        {\r\n            \"id\": \"string\",\r\n            \"programDetailId\": \"string\",\r\n            \"questionTypeId\": \"57a852c9-14be-41f4-b2f2-b3896bafff24\",\r\n            \"questionTypeName\": \"string\",\r\n            \"question\": \"Who are you in not less than 50 words\",\r\n            \"maxAllowedChoices\": 0,\r\n            \"enableOtherOption\": false,\r\n            \"choices\": []\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7098/api/v1/Employer/CreateProgramAndApplicationForm",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"Employer",
+						"CreateProgramAndApplicationForm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Application",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"\",\r\n  \"programDetailId\": \"8aae5fd9-4b9b-4b7f-a506-0caa5c557c87\",\r\n  \"firstName\": \"James\",\r\n  \"lastName\": \"Creek\",\r\n  \"email\": \"jcreek@example.com\",\r\n  \"phoneNumber\": \"08088392839\",\r\n  \"nationality\": \"English\",\r\n  \"currentResidence\": \"Hathown Upon Hyre\",\r\n  \"idNumber\": \"8493483\",\r\n  \"dateOfBirth\": \"13/01/2024\",\r\n  \"gender\": \"Male\",\r\n  \"answers\": [\r\n    {\r\n      \"id\": \"string\",\r\n      \"programDetailQuestionTypeId\": \"4e1d5ffd-80d7-4155-b3df-45c8f3deaad2\",\r\n      \"answer\": \"I am the one who will be HIM\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7098/api/v1/Candidate/SubmitApplication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"Candidate",
+						"SubmitApplication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Personal Info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"\",\r\n  \"fieldName\": \"nationality\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7098/api/v1/ApplicationFormBuilder/AddPersonalInfoField",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"ApplicationFormBuilder",
+						"AddPersonalInfoField"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Question Type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"\",\r\n  \"name\": \"MultipleChoice\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7098/api/v1/ApplicationFormBuilder/AddQuestionType",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"ApplicationFormBuilder",
+						"AddQuestionType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Question Types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7098/api/v1/ApplicationFormBuilder/QuestionTypes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"ApplicationFormBuilder",
+						"QuestionTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Personal Info Fields",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7098/api/v1/ApplicationFormBuilder/PersonalInfoFields",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"ApplicationFormBuilder",
+						"PersonalInfoFields"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7098/api/v1/Candidate/GetQuestions?programDetailId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"Candidate",
+						"GetQuestions"
+					],
+					"query": [
+						{
+							"key": "programDetailId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Application Question",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"\",\r\n  \"programDetailId\": \"\",\r\n  \"questionTypeId\": \"\",\r\n  \"questionTypeName\": \"\",\r\n  \"question\": \"\",\r\n  \"maxAllowedChoices\": 0,\r\n  \"enableOtherOption\": false,\r\n  \"choices\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7098/api/v1/Employer/EditApplicationQuestion",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7098",
+					"path": [
+						"api",
+						"v1",
+						"Employer",
+						"EditApplicationQuestion"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

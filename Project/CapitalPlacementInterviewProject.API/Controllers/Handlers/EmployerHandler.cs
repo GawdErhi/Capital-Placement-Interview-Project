@@ -41,6 +41,9 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
         {
             try
             {
+                //check if program already exists
+                if(_programDetailRepository.Count(x => x.Title.ToLower() == programDetail.Title.ToLower()) > 0) { throw new InvalidUserInputException("There's already a program with the same title"); }
+
                 //validate personal info fields
                 if (programDetail.PersonalInfoFields == null || programDetail.PersonalInfoFields.Count == 0) { throw new InvalidUserInputException("No personal info fields selected"); }
                 foreach(var personalInfoField in programDetail.PersonalInfoFields)

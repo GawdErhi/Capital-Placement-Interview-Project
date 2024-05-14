@@ -44,6 +44,11 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
             {
                 //check if program exists
                 if (_programDetailRepository.Count(x => x.Id == programCandidate.ProgramDetailId) <= 0) { throw new InvalidUserInputException("Invalid program selected"); }
+                //check if candidate has already registered
+                if(_programCandidateRepository.Count(x => x.FirstName.ToLower() == programCandidate.FirstName.ToLower() && x.LastName.ToLower() == programCandidate.LastName.ToLower() && x.Email.ToLower() == programCandidate.Email.ToLower()) > 0)
+                {
+                    throw new InvalidUserInputException("Candidate has already been registered");
+                }
                 //validate question types
                 bool hasQuestions = _programDetailQuestionTypeRepository.Count(x => x.ProgramDetailId == programCandidate.ProgramDetailId) > 0;
                 if((hasQuestions && programCandidate.Answers == null) || (hasQuestions && programCandidate.Answers.Count == 0)) { throw new InvalidUserInputException("No answers provided for program questions"); }
