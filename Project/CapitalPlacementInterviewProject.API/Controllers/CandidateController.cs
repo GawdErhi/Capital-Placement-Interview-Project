@@ -1,4 +1,6 @@
-﻿using CapitalPlacementInterviewProject.API.DTO;
+﻿using CapitalPlacementInterviewProject.API.Controllers.Handlers.Contracts;
+using CapitalPlacementInterviewProject.API.DTO;
+using CapitalPlacementInterviewProject.API.Extensions;
 using CapitalPlacementInterviewProject.API.HelperModels;
 using Microsoft.AspNetCore.Mvc;
 using ILogger = CapitalPlacementInterviewProject.API.Services.Contracts.ILogger;
@@ -6,11 +8,14 @@ using ILogger = CapitalPlacementInterviewProject.API.Services.Contracts.ILogger;
 namespace CapitalPlacementInterviewProject.API.Controllers
 {
     [ApiController]
+    [Route("api/v1/[controller]/[action]")]
     public class CandidateController : ControllerBase
     {
+        private readonly ICandidateHandler _handler;
         private readonly ILogger _logger;
-        public CandidateController(ILogger logger)
+        public CandidateController(ICandidateHandler handler, ILogger logger)
         {
+            _handler = handler;
             _logger = logger;
         }
 
@@ -19,7 +24,8 @@ namespace CapitalPlacementInterviewProject.API.Controllers
         {
             try
             {
-                return Ok(await Task.FromResult(true));
+                if (string.IsNullOrWhiteSpace(programDetailId)) { return StatusCode(StatusCodes.Status400BadRequest, new APIResponseModel<string> { Error = true, Errors = new List<string> { "No program detail specified" }, Data = null }); }
+                return Ok(await _handler.GetQuestions(programDetailId));
             }catch(Exception ex)
             {
                 _logger.Error(ex.Message, ex);
@@ -28,11 +34,13 @@ namespace CapitalPlacementInterviewProject.API.Controllers
         }
 
         [HttpPost]
+        [Consumes("application/json")]
         public async Task<IActionResult> SubmitApplication([FromBody]ProgramCandidateDTO programCandidate)
         {
             try
             {
-                return Ok(await Task.FromResult(true));
+                if (!ModelState.IsValid) { return BadRequest(new APIResponseModel<string> { Error = true, Errors = ModelState.GetErrors(), Data = null }); }
+                return Ok(await _handler.ValidateAndSubmitApplication(programCandidate));
             }catch(Exception ex)
             {
                 _logger.Error(ex.Message, ex);

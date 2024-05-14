@@ -1,5 +1,7 @@
 ﻿using CapitalPlacementInterviewProject.API.DB;
 using CapitalPlacementInterviewProject.API.Models;
+using Microsoft.Azure.Cosmos.Linq;
+using System.Linq.Expressions;
 
 namespace CapitalPlacementInterviewProject.API.Repository
 {
@@ -68,11 +70,28 @@ namespace CapitalPlacementInterviewProject.API.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<T> GetAsync(int id)
+        public async Task<T> GetAsync(string id)
         {
             try
             {
                 return await _dbContext.FindAsync<T>(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Gets entity based on condition
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IEnumerable<T> Get(Expression<Func<T, bool>> lambda)
+        {
+            try
+            {
+                return _dbContext.Set<T>().Where(lambda);
             }
             catch (Exception)
             {
@@ -91,6 +110,23 @@ namespace CapitalPlacementInterviewProject.API.Repository
             {
                 _dbContext.Update(model);
                 return _dbContext.SaveChanges() > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Returns item count for lambda
+        /// </summary>
+        /// <param name="lambda"></param>
+        /// <returns></returns>
+        public int Count(Expression<Func<T, bool>> lambda)
+        {
+            try
+            {
+                return _dbContext.Set<T>().Count(lambda);
             }
             catch (Exception)
             {
