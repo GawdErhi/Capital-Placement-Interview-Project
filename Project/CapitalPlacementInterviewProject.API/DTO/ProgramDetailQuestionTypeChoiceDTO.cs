@@ -6,6 +6,6 @@
 
         public string ProgramDetailQuestionTypeId { get; set; }
 
-        public string Choice { get; set; }
+        public string? Choice { get; set; }
     }
 }

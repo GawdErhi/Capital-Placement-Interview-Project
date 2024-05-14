@@ -25,6 +25,7 @@ namespace CapitalPlacementInterviewProject.API
             builder.Services.AddRepositories();
             builder.Services.AddCoreServices();
             builder.Services.AddHandlers();
+            builder.Services.AddLog4NetLogger();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -34,6 +35,8 @@ namespace CapitalPlacementInterviewProject.API
 
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.MapControllers();
 

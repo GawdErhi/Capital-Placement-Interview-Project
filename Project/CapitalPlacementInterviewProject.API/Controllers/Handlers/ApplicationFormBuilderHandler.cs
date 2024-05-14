@@ -27,7 +27,7 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
             try
             {
                 //check if field with same name exists
-                if (_personalInfoFieldRepository.Count(x => x.FieldName == personalInfoField.FieldName) > 0) { throw new InvalidUserInputException("Info field already exists"); }
+                if (_personalInfoFieldRepository.Count(x => x.FieldName.ToLower() == personalInfoField.FieldName.ToLower()) > 0) { throw new InvalidUserInputException("Info field already exists"); }
 
                 await _personalInfoFieldRepository.AddAsync(new Models.PersonalInfoField { Id = Guid.NewGuid().ToString(), FieldName = personalInfoField.FieldName });
                 await _personalInfoFieldRepository.SaveAsync();
@@ -63,7 +63,7 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
             try
             {
                 //check if question type with same name already exists
-                if(_questionTypeRepository.Count(x => x.Name == questionType.Name) > 0) { throw new InvalidUserInputException("Question type already exists"); }
+                if(_questionTypeRepository.Count(x => x.Name.ToLower() == questionType.Name.ToLower()) > 0) { throw new InvalidUserInputException("Question type already exists"); }
 
                 await _questionTypeRepository.AddAsync(new Models.QuestionType { Id = Guid.NewGuid().ToString(), Name = questionType.Name });
                 await _questionTypeRepository.SaveAsync();

@@ -1,5 +1,6 @@
 ﻿using CapitalPlacementInterviewProject.API.Controllers.Handlers.Contracts;
 using CapitalPlacementInterviewProject.API.DTO;
+using CapitalPlacementInterviewProject.API.Exceptions;
 using CapitalPlacementInterviewProject.API.Extensions;
 using CapitalPlacementInterviewProject.API.HelperModels;
 using CapitalPlacementInterviewProject.API.Models;
@@ -28,6 +29,11 @@ namespace CapitalPlacementInterviewProject.API.Controllers
             {
                 if (!ModelState.IsValid) { return BadRequest(new APIResponseModel<string> { Error = true, Errors = ModelState.GetErrors(), Data = null }); }
                 return Ok(await _handler.CreatePersonalInfoField(personalInfoField));
+            }
+            catch(InvalidUserInputException ex)
+            {
+                _logger.Error(ex.Message, ex);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResponseModel<string> { Error = true, Errors = new List<string> { ex.Message }, Data = null });
             }
             catch (Exception ex)
             {
@@ -58,6 +64,11 @@ namespace CapitalPlacementInterviewProject.API.Controllers
             {
                 if (!ModelState.IsValid) { return BadRequest(new APIResponseModel<string> { Error = true, Errors = ModelState.GetErrors(), Data = null }); }
                 return Ok(await _handler.CreateQuestionType(questionType));
+            }
+            catch(InvalidUserInputException ex)
+            {
+                _logger.Error(ex.Message, ex);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResponseModel<string> { Error = true, Errors = new List<string> { ex.Message }, Data = null });
             }
             catch (Exception ex)
             {

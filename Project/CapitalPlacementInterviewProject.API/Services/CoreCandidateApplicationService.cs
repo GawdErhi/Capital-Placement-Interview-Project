@@ -46,7 +46,7 @@ namespace CapitalPlacementInterviewProject.API.Services
                     PhoneNumber = programCandidate.PhoneNumber,
                     Nationality = programCandidate.Nationality,
                     IdNumber = programCandidate.IdNumber,
-                    DateOfBirth = DateTime.ParseExact(programCandidate.DateOfBirth, "d", CultureInfo.InvariantCulture),
+                    DateOfBirth = DateTime.ParseExact(programCandidate.DateOfBirth, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Gender = programCandidate.Gender,
                     ProgramDetailId = programCandidate.ProgramDetailId,
                 };

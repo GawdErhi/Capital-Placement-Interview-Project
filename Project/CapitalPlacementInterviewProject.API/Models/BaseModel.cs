@@ -7,8 +7,8 @@ namespace CapitalPlacementInterviewProject.API.Models
         [Key]
         public virtual string Id { get; set; }
 
-        public virtual DateTime CreatedAt { get; set; }
+        public virtual DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public virtual DateTime LastUpdatedAt { get; set; }
+        public virtual DateTime LastUpdatedAt { get; set; } = DateTime.Now;
     }
 }

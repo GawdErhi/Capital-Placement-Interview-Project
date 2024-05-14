@@ -68,7 +68,7 @@ namespace CapitalPlacementInterviewProject.API.Services
                     questions.Add(new ProgramDetailQuestionType
                     {
                         Id = programDetailQuestionTypeId,
-                        ProgramDetailId = programDetail.Id,
+                        ProgramDetailId = programDetailModel.Id,
                         QuestionTypeId = question.QuestionTypeId,
                         Question = question.Question,
                         MaxAllowedChoices = question.MaxAllowedChoices,

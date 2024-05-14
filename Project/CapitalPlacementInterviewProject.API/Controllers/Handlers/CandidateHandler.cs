@@ -18,8 +18,9 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
         private readonly IProgramDetailQuestionTypeChoiceRepository _programDetailQuestionTypeChoiceRepository;
         private readonly IQuestionTypeRepository _questionTypeRepository;
         private readonly ICoreCandidateApplicationService _coreCandidateApplicationService;
+        private readonly IProgramDetailRepository _programDetailRepository;
         private readonly ILogger _logger;
-        public CandidateHandler(IProgramCandidateRepository programCandidateRepository, IProgramCandidateQuestionTypeAnswerRepository questionAnswerRepository, IProgramDetailQuestionTypeRepository programDetailQuestionTypeRepository, IProgramDetailQuestionTypeChoiceRepository programDetailQuestionTypeChoiceRepository, IQuestionTypeRepository questionTypeRepository, ICoreCandidateApplicationService coreCandidateApplicationService, ILogger logger)
+        public CandidateHandler(IProgramCandidateRepository programCandidateRepository, IProgramCandidateQuestionTypeAnswerRepository questionAnswerRepository, IProgramDetailQuestionTypeRepository programDetailQuestionTypeRepository, IProgramDetailQuestionTypeChoiceRepository programDetailQuestionTypeChoiceRepository, IQuestionTypeRepository questionTypeRepository, ICoreCandidateApplicationService coreCandidateApplicationService, IProgramDetailRepository programDetailRepository, ILogger logger)
         {
             _programCandidateRepository = programCandidateRepository;
             _questionAnswerRepository = questionAnswerRepository;
@@ -27,6 +28,7 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
             _programDetailQuestionTypeChoiceRepository = programDetailQuestionTypeChoiceRepository;
             _questionTypeRepository = questionTypeRepository;
             _coreCandidateApplicationService = coreCandidateApplicationService;
+            _programDetailRepository = programDetailRepository;
             _logger = logger;
         }
 
@@ -40,6 +42,8 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
         {
             try
             {
+                //check if program exists
+                if (_programDetailRepository.Count(x => x.Id == programCandidate.ProgramDetailId) <= 0) { throw new InvalidUserInputException("Invalid program selected"); }
                 //validate question types
                 bool hasQuestions = _programDetailQuestionTypeRepository.Count(x => x.ProgramDetailId == programCandidate.ProgramDetailId) > 0;
                 if((hasQuestions && programCandidate.Answers == null) || (hasQuestions && programCandidate.Answers.Count == 0)) { throw new InvalidUserInputException("No answers provided for program questions"); }
@@ -72,7 +76,7 @@ namespace CapitalPlacementInterviewProject.API.Controllers.Handlers
                 List<ProgramDetailQuestionTypeDTO> questions = _programDetailQuestionTypeRepository.Get(x => x.ProgramDetailId == programDetailId).Select(x => new ProgramDetailQuestionTypeDTO
                 {
                     Id = x.Id,
-                    Question = x.Id,
+                    Question = x.Question,
                     QuestionTypeId = x.QuestionTypeId,
                     ProgramDetailId = x.ProgramDetailId,
                     MaxAllowedChoices = x.MaxAllowedChoices,
