@@ -1,6 +1,7 @@
 ﻿using CapitalPlacementInterviewProject.API.DB;
 using CapitalPlacementInterviewProject.API.Models;
 using Microsoft.Azure.Cosmos.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace CapitalPlacementInterviewProject.API.Repository
@@ -132,6 +133,19 @@ namespace CapitalPlacementInterviewProject.API.Repository
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Returns all items in entity
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<T>> GetCollection()
+        {
+            try
+            {
+                return await _dbContext.Set<T>().ToListAsync();
+            }
+            catch (Exception) { throw; }
         }
     }
 }

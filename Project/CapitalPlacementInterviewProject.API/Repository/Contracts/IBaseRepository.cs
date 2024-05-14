@@ -53,5 +53,11 @@ namespace CapitalPlacementInterviewProject.API.Repository.Contracts
         /// <param name="lambda"></param>
         /// <returns></returns>
         int Count(Expression<Func<T, bool>> lambda);
+
+        /// <summary>
+        /// Returns all items in entity
+        /// </summary>
+        /// <returns></returns>
+        Task<List<T>> GetCollection();
     }
 }

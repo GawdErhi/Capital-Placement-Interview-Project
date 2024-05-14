@@ -1,4 +1,5 @@
 using CapitalPlacementInterviewProject.API.DB;
+using CapitalPlacementInterviewProject.API.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CapitalPlacementInterviewProject.API
@@ -12,14 +13,23 @@ namespace CapitalPlacementInterviewProject.API
             // Add services to the container.
             builder.Services.AddDbContext<ProjectDBContext>(options =>
             {
-                options.UseCosmos("AccountEndpoint=https://localhost:9090/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==", "CapitalPlacementInterviewProject");
+                options.UseCosmos(builder.Configuration.GetConnectionString("Default"), builder.Configuration.GetSection("DatabaseNames").GetValue<string>("Default"));
             });
-            builder.Services.AddControllers();
-
+            builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+                options.SuppressMapClientErrors = true;
+            });
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddRepositories();
+            builder.Services.AddCoreServices();
+            builder.Services.AddHandlers();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-
+            var dbContext = new ProjectDBContext();
+            dbContext.Database.EnsureCreated();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
